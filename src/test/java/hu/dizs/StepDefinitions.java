@@ -53,7 +53,7 @@ public class StepDefinitions {
             List<Item> itemList = map.get(key).stream().toList();
             Item item = itemList.getFirst();
             if (itemList.size() > 1) {
-                logger.error("Item {} differs: [{}]", key, compareItems(itemList));
+                logger.error("Item '{}' differs: [{}]", key, compareItems(itemList));
             } else {
                 if (
                     !set1.contains(item)) {
