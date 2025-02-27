@@ -49,9 +49,20 @@ public class StepDefinitions {
 
     @Then("the lists should contain the same items with name, price, and category, regardless of order")
     public void the_lists_should_contain_the_same_items_with_name_price_and_category_regardless_of_order() {
-        for (String key : map.keySet() ) {
-            if (map.get(key).size() > 1) {
-                logger.error("Item {} differs: [{}]", key, compareItems(map.get(key).stream().toList()));
+        for (String key : map.keySet()) {
+            List<Item> itemList = map.get(key).stream().toList();
+            Item item = itemList.getFirst();
+            if (itemList.size() > 1) {
+                logger.error("Item {} differs: [{}]", key, compareItems(itemList));
+            } else {
+                if (
+                    !set1.contains(item)) {
+                    logger.error("The first list does not contain: {}", item);
+                }
+                if (!set2.contains(item)) {
+                    logger.error("The second list does not contain: {}", item);
+                }
+
             }
         }
         Assertions.assertEquals(set1, set2);
