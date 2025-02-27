@@ -53,7 +53,7 @@ public class StepDefinitions {
             List<Item> itemList = map.get(key).stream().toList();
             Item item = itemList.getFirst();
             if (itemList.size() > 1) {
-                logger.error("Item '{}' differs: [{}]", key, compareItems(itemList));
+                logger.error("Item '{}' differs: [{}]", key, getDifferencesOfItems(itemList));
             } else {
                 if (
                     !set1.contains(item)) {
@@ -68,7 +68,7 @@ public class StepDefinitions {
         Assertions.assertEquals(set1, set2);
     }
 
-    private String compareItems(List<Item> items) {
+    private String getDifferencesOfItems(List<Item> items) {
         List<String> result = new ArrayList<>();
         double price1 = items.get(0).getPrice();
         double price2 = items.get(1).getPrice();
